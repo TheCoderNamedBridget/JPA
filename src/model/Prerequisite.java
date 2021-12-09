@@ -1,8 +1,12 @@
 package model;
-
+@Entity(name = "prerequisites")
 public class Prerequisite {
-	@Column(name = "PREREQUISITE_MINIMUM_GRADE")
+	@Column(name = "prerequisite_minimum_grade")
     private char minimumGrade;
+	
+    @OneToOne
+    @JoinColumn(name = "course_id")
+    private Course course_id;
     
     public Prerequisite() {
     }

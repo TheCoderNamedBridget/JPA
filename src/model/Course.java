@@ -1,25 +1,52 @@
 package model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+@Entity(name = "courses")
 
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "department_id", "course_id" })
+})
 public class Course {
-    @Column(name = "COURSE_NUMBER")
+	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@Column(name = "course_id")
+	private int courseId;
+	
+    @Column(name = "course_number")
+    @NotNull
     private String number;// course number could be anywhere from 100-9000lvl and in the UML it is shown
                           // as a string
-    @Column(name = "COURSE_TITLE")
+    
+    @Column(name = "course_title")
+    @NotNull
     private String title;// title is shown as a string in the uml
-    @Column(name = "COURSE_UNITS")
+    
+    @Column(name = "course_units")
+    @NotNull
     private byte units;// no course will have more than 127 units which is the biggest value for a byte
     
-    // The unidirectional link to Section
-    @OneToMany
-    @JoinColumn(name = "DEPARTMENT_NAME")
+    // The bidirectional link to Department
+    //course has one and exactly 1 department
+    @OneToOne
+    @JoinColumn(name = "department_id")
     private Department department;
+    
+    // The bidirectional link to course
+	@OneToMany(mappedBy = "section")
+    private List<Section> sections;
     
     //TODO need to add I think a bidirectional link between courses and prereq?
     //I dont think we need a link to section number because course is it's parent
+    @OneToMany(mappedBy="prerequisite")
+    private Set<Prerequisite> prerequisite;
+
+    @ManyToOne
+    private Comment parentComment;
     
     public Course() {
     }
