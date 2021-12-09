@@ -38,30 +38,50 @@ public class App {
         Timeslot f = new Timeslot((byte) 0000010, LocalTime.of(8, 0), LocalTime.of(10, 45));
         
         //Sections
-        Section cecs174sec1 = new Section((byte)174, (short) 105, Spring2021, ts);
+        Section cecs174sec1 = new Section((byte)174, (short) 105, Spring2021, mw);
         Section cecs274sec1 = new Section((byte)274, (short) 140, Fall2021, ts);
-        Section cecs277sec3 = new Section((byte)277, (short) 35, Fall2021, ts);
+        Section cecs277sec3 = new Section((byte)277, (short) 35, Fall2021, f);
         Section cecs282sec5 = new Section((byte)282, (short) 35, Spring2022, ts);
-        Section cecs277sec1 = new Section((byte)277, (short) 35, Spring2022, ts);
-        Section cecs282sec7 = new Section((byte)282, (short) 35, Spring2022, ts);
-        Section ital101Asec1 = new Section((byte)101, (short) 25, Spring2022, ts);
+        Section cecs277sec1 = new Section((byte)277, (short) 35, Spring2022, mw);
+        Section cecs282sec7 = new Section((byte)282, (short) 35, Spring2022, mw);
+        Section ital101Asec1 = new Section((byte)101, (short) 25, Spring2022, mwf);
+        
         
         //Students
         Student naomi = new Student("Naomi Nagata");
         Student james = new Student("James Holden");
         Student amos = new Student("Amos Burton");
         
-        Transcript trans1 = new Transcript(naomi, cecs174sec1);
-        trans1.setGradeEarned(" A");
-        trans1.getStudent().getTranscripts().add(trans1);
-        
-        Transcript trans2 = new Transcript(naomi, cecs274sec1);
-        trans2.setGradeEarned(" D");
-        trans2.getStudent().getTranscripts().add(trans2);
-        
-        Transcript trans3 = new Transcript(naomi, cecs277sec3);
-        trans3.setGradeEarned(" B");
-        trans3.getStudent().getTranscripts().add(trans3);
+        //Naomi Transcripts
+        Transcript naomiTrans1 = new Transcript(naomi, cecs174sec1);
+        naomiTrans1.setGradeEarned(" A");
+        naomiTrans1.getStudent().getTranscripts().add(naomiTrans1);
+        Transcript naomiTrans2 = new Transcript(naomi, cecs274sec1);
+        naomiTrans2.setGradeEarned(" A");
+        naomiTrans2.getStudent().getTranscripts().add(naomiTrans2);
+        Transcript naomiTrans3 = new Transcript(naomi, cecs277sec3);
+        naomiTrans3.setGradeEarned(" A");
+        naomiTrans3.getStudent().getTranscripts().add(naomiTrans3);
+        //James Transcripts
+        Transcript jamesTrans1 = new Transcript(james, cecs174sec1);
+        jamesTrans1.setGradeEarned(" C");
+        jamesTrans1.getStudent().getTranscripts().add(jamesTrans1);
+        Transcript jamesTrans2 = new Transcript(james, cecs274sec1);
+        jamesTrans2.setGradeEarned(" C");
+        jamesTrans2.getStudent().getTranscripts().add(jamesTrans2);
+        Transcript jamesTrans3 = new Transcript(james, cecs277sec3);
+        jamesTrans3.setGradeEarned(" C");
+        jamesTrans3.getStudent().getTranscripts().add(jamesTrans3);
+        //Amos Transcripts
+        Transcript amosTrans1 = new Transcript(amos, cecs174sec1);
+        amosTrans1.setGradeEarned(" C");
+        amosTrans1.getStudent().getTranscripts().add(amosTrans1);
+        Transcript amosTrans2 = new Transcript(amos, cecs274sec1);
+        amosTrans2.setGradeEarned(" B");
+        amosTrans2.getStudent().getTranscripts().add(amosTrans2);
+        Transcript amosTrans3 = new Transcript(amos, cecs277sec3);
+        amosTrans3.setGradeEarned(" D");
+        amosTrans3.getStudent().getTranscripts().add(amosTrans3);
         
         
         naomi.getGPA();
