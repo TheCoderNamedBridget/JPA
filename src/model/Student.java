@@ -90,12 +90,12 @@ public class Student {
         this.name = name;
     }
 
-    public Set<Section> getSections() {
-        return sections;
+    public Set<Section> getEnrolled() {
+        return enrolled;
     }
 
-    public void setSections(Set<Section> sections) {
-        this.sections = sections;
+    public void setSections(Set<Section> enrolled) {
+        this.enrolled = enrolled;
     }
 
     public Set<Transcript> getTranscripts() {
