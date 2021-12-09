@@ -1,12 +1,13 @@
 package model;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity(name = "students")
 public class Student {
-
+	private static final DecimalFormat df = new DecimalFormat("0.00");
     /*
      * StudentID should be unique already since its a PK
      */
@@ -53,16 +54,40 @@ public class Student {
      */
     public double getGPA() {
     	
-    	int sumGrades = 0;
-    	int numClasses = 0;
+    	double sumGrades = 0;
+    	double numClasses = 0;
     	
     	Iterator<Transcript> itr = transcripts.iterator();
     	
     	while( itr.hasNext() )
     	{
-    		System.out.println("tryin to get GPA" + itr.next().toString() );
+    		Transcript t = itr.next();
+    		System.out.println("tryin to get GPA [" + t.getGradeEarned() + "] [" + t.getSectionId().getSectionNumber() + "] [" + t.getStudent().getName() +"]");
+    		switch ( t.getGradeEarned() )
+    		{
+    			case " A":
+    				sumGrades+=4;
+    				break;
+    			case " B":
+    				sumGrades+=3;
+    				break;
+    			case " C":
+    				sumGrades+=2;
+    				break;
+    			case " D":
+    				sumGrades+=1;
+    				break;
+    				//otherwise do nothing
+//    			default:
+//    				sumGrades+=0;
+    		}
+    		numClasses++;
     	}
-        return 0;
+    	System.out.println("printing gpa " + sumGrades + " " + numClasses + " " + (sumGrades/numClasses));
+    	//limiting gpa to 2 decimal places
+    	Double d = Double.parseDouble(df.format((sumGrades/numClasses)));
+    	System.out.println("printing gpa " + d );
+        return d;
     }
 
     /*

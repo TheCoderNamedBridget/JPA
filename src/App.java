@@ -51,11 +51,19 @@ public class App {
         Student james = new Student("James Holden");
         Student amos = new Student("Amos Burton");
         
-        Transcript trans = new Transcript(naomi, cecs174sec1);
-        trans.setGradeEarned("A");
-        Student tester = trans.getStudent();
-        tester.toString();
-        tester.getTranscripts().add(trans);
+        Transcript trans1 = new Transcript(naomi, cecs174sec1);
+        trans1.setGradeEarned(" A");
+        trans1.getStudent().getTranscripts().add(trans1);
+        
+        Transcript trans2 = new Transcript(naomi, cecs274sec1);
+        trans2.setGradeEarned(" D");
+        trans2.getStudent().getTranscripts().add(trans2);
+        
+        Transcript trans3 = new Transcript(naomi, cecs277sec3);
+        trans3.setGradeEarned(" B");
+        trans3.getStudent().getTranscripts().add(trans3);
+        
+        
         naomi.getGPA();
 
         em.persist(Spring2021);
