@@ -1,14 +1,10 @@
 package model;
-@Entity(name = "prerequisites")
+
+import jakarta.persistence.Column;
+
 public class Prerequisite {
 	@Column(name = "prerequisite_minimum_grade")
-	@NotNull
     private char minimumGrade;
-	
-	//many preqs for one course
-	@ManyToOne
-	@JoinColumn(name="course_id")
-	private Course course_id;
     
     public Prerequisite() {
     }
@@ -22,7 +18,7 @@ public class Prerequisite {
         return "Prerequisite minimum grade" + minimumGrade;
     }
     
-    public String getPrerequisiteMinimumGrade() {
+    public char getPrerequisiteMinimumGrade() {
         return minimumGrade;
     }
 

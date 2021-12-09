@@ -20,7 +20,7 @@ public class Section {
     private int sectionId;
 
     /*
-     * Reason:
+     * Reason: 
      */
     @Column(name = "section_number")
     @NotNull

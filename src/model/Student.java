@@ -40,6 +40,7 @@ public class Student {
 
     public Student(@NotNull String name) {
         this.name = name;
+        transcripts = new HashSet<Transcript>();
     }
 
     /*
@@ -51,6 +52,16 @@ public class Student {
      * dividing the sum by the total number of units in the transcript.
      */
     public double getGPA() {
+    	
+    	int sumGrades = 0;
+    	int numClasses = 0;
+    	
+    	Iterator<Transcript> itr = transcripts.iterator();
+    	
+    	while( itr.hasNext() )
+    	{
+    		System.out.println("tryin to get GPA" + itr.next().toString() );
+    	}
         return 0;
     }
 

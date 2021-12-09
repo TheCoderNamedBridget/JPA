@@ -1,26 +1,12 @@
 package model;
 
-import java.util.List;
+import jakarta.persistence.Column;
 
-@Entity(name = "departments")
 public class Department {
-	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-	@Column(name = "department_id")
-	private int departmentId;
-	
 	@Column(name = "department_name")
-	@NotNull
     private String name;// name is shown as a string in the uml
-	
 	@Column(name = "department_abbreviation")
-	@NotNull
     private String abbreviation;// abbreviation is shown as a string in the uml
-	
-    // The bidirectional link to course
-	@OneToMany(mappedBy = "course")
-    private List<Course> courses;
     
     public Department() {
     }
@@ -47,7 +33,7 @@ public class Department {
         return abbreviation;
     }
 
-    public void setDepartmentName(String abbreviation) {
+    public void setDepartmentAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
     }
 
