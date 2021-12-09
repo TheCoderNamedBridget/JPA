@@ -11,9 +11,11 @@ public class Department {
 	private int departmentId;
 	
 	@Column(name = "department_name")
+	@NotNull
     private String name;// name is shown as a string in the uml
 	
 	@Column(name = "department_abbreviation")
+	@NotNull
     private String abbreviation;// abbreviation is shown as a string in the uml
 	
     // The bidirectional link to course

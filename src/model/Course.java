@@ -40,13 +40,9 @@ public class Course {
 	@OneToMany(mappedBy = "section")
     private List<Section> sections;
     
-    //TODO need to add I think a bidirectional link between courses and prereq?
-    //I dont think we need a link to section number because course is it's parent
+    //TODO not sure if this is the way to represent a recurrsive association in JPA
     @OneToMany(mappedBy="prerequisite")
     private Set<Prerequisite> prerequisite;
-
-    @ManyToOne
-    private Comment parentComment;
     
     public Course() {
     }
