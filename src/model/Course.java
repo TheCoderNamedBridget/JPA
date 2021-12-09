@@ -1,48 +1,41 @@
 package model;
 
-import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-@Entity(name = "courses")
+import jakarta.persistence.OneToMany;
 
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "department_id", "course_id" })
-})
 public class Course {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "course_id")
+    private int courseId;
 	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-	@Column(name = "course_id")
-	private int courseId;
-	
-    @Column(name = "course_number")
-    @NotNull
+    @Column(name = "course_number", length = 8)
     private String number;// course number could be anywhere from 100-9000lvl and in the UML it is shown
                           // as a string
-    
     @Column(name = "course_title")
-    @NotNull
     private String title;// title is shown as a string in the uml
-    
     @Column(name = "course_units")
-    @NotNull
     private byte units;// no course will have more than 127 units which is the biggest value for a byte
     
-    // The bidirectional link to Department
-    //course has one and exactly 1 department
-    @OneToOne
-    @JoinColumn(name = "department_id")
+    // The unidirectional link to Section
+    @OneToMany
+    @JoinColumn(name = "department_name")
     private Department department;
     
-    // The bidirectional link to course
-	@OneToMany(mappedBy = "section")
-    private List<Section> sections;
-    
-    //TODO not sure if this is the way to represent a recurrsive association in JPA
-    @OneToMany(mappedBy="prerequisite")
-    private Set<Prerequisite> prerequisite;
+    /*
+     * Unidirectional
+     * A course has many preqs
+     */
+    @ManyToOne
+    private Set<Prerequisite> prereqs;
     
     public Course() {
     }
@@ -66,7 +59,7 @@ public class Course {
         this.number = number;
     }
 
-    public int getCourseTitle() {
+    public String getCourseTitle() {
         return title;
     }
 
