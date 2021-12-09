@@ -3,6 +3,7 @@ package model;
 import java.util.Set;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,7 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-
+@Entity(name = "course")
 public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -44,6 +45,10 @@ public class Course {
         this.number = number;
         this.title = title;
         this.units = units;
+    }
+    
+    public Set<Prerequisite> getPreq() {
+        return prereqs;
     }
 
     @Override

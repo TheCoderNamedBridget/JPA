@@ -62,6 +62,7 @@ public class Student {
     	while( itr.hasNext() )
     	{
     		Transcript t = itr.next();
+    		
     		System.out.println("tryin to get GPA [" + t.getGradeEarned() + "] [" + t.getSectionId().getSectionNumber() + "] [" + t.getStudent().getName() +"]");
     		switch ( t.getGradeEarned() )
     		{
@@ -104,7 +105,65 @@ public class Student {
      * start and end times.
      */
     public RegistrationResult registerForSection(Section s) {
-        return null;
+    	//iterate through transcript to see if student has already taken course and got at least a c
+    	Iterator<Transcript> transItr = transcripts.iterator();
+    	while( transItr.hasNext() )
+    	{
+    		Transcript t = transItr.next();
+    		
+    		System.out.println("trying to see whcih courses taken " + t.getSectionId().getCourse().getCourseTitle());
+    		if ( t.getSectionId().getCourse().getCourseTitle().equals( s.getCourse().getCourseTitle()) )
+    		{
+    			if ( t.getGradeEarned().equals(" A" ) || t.getGradeEarned().equals(" B" ) || t.getGradeEarned().equals(" C" ) )
+    			{
+    				return RegistrationResult.ALREADY_PASSED;
+    			}
+    		}
+    	}
+    	//iterate through list of students in the section to see if this student is already registered.
+    	Iterator<Student> alreadyReg = s.getStudents().iterator();
+    	while( alreadyReg.hasNext() )
+    	{
+    		Student t = alreadyReg.next();
+    		
+    		System.out.println("trying to see if already registered");
+    		if ( t.studentId == studentId )
+    		{
+    			return RegistrationResult.ENROLLED_IN_SECTION;
+    		}
+    	}
+    	//TODO Check for course prereq 
+    	Set<Prerequisite> prereqs = s.getCourse().getPreq();
+    	Iterator<Prerequisite> prereqsItr = prereqs.iterator();
+//    	while( prereqsItr.hasNext() )
+//    	{
+//    		Prerequisite t = prereqsItr.next();
+//    		
+//    		System.out.println("trying to see if took prereqs");
+//    		if ( t. )
+//    		{
+//    			return RegistrationResult.ENROLLED_IN_ANOTHER;
+//    		}
+//    	}RegistrationResult.NO_PREREQUISITES
+    	
+    	//iterate through enrolled list to see if student is already enrolled in a different section of course
+    	
+    	Iterator<Section> enrolledItr = enrolled.iterator();
+    	while( enrolledItr.hasNext() )
+    	{
+    		Section t = enrolledItr.next();
+    		
+    		System.out.println("trying to see if already registered");
+    		if ( t.getCourse().getCourseTitle().equals( s.getCourse().getCourseTitle()) )
+    		{
+    			return RegistrationResult.ENROLLED_IN_ANOTHER;
+    		}
+    	}
+    	
+    	//TODO iterate through enrolled list to see if there is at least 1 minute of overlap in the schedule 
+    	//RegistrationResult.TIME_CONFLICT
+    	
+        return RegistrationResult.SUCCESS;
     }
 
     public int getStudentId() {
