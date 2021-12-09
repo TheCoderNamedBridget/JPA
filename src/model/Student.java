@@ -1,6 +1,7 @@
 package model;
 
 import java.text.DecimalFormat;
+import java.time.LocalTime;
 import java.util.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -160,9 +161,30 @@ public class Student {
     		}
     	}
     	
-    	//TODO iterate through enrolled list to see if there is at least 1 minute of overlap in the schedule 
-    	//RegistrationResult.TIME_CONFLICT
-    	
+    	//iterate through enrolled list to see if there is at least 1 minute of overlap in the schedule 
+    	Iterator<Section> timeConflictItr = enrolled.iterator();
+    	while( timeConflictItr.hasNext() )
+    	{
+    		Section t = timeConflictItr.next();
+    		LocalTime startTimeT = t.getTimeslot().getStartTime();
+    		LocalTime endTimeT = t.getTimeslot().getStartTime();
+    		
+    		LocalTime startTimeS = s.getTimeslot().getStartTime();
+    		LocalTime endTimeS = s.getTimeslot().getStartTime();
+    		//t1.compareto(t2)
+    		//if t1 > t1 return 1
+    		//if t1 < t2 return -1
+    		//if equal return 0
+    		System.out.println("trying to see if time conflict");
+    		//Comparing just the start and end time of variable t should be enough to tell if the section times overlap
+    		//startTimeT.compareTo(startTimeS) == 1 && startTimeT.compareTo(endTimeS) == -1 
+    		//endTimeT.compareTo(startTimeS) == 1 && endTimeT.compareTo(endTimeS) == -1 
+    		if ( (startTimeT.compareTo(startTimeS) == 1 && startTimeT.compareTo(endTimeS) == -1) || 
+    				(endTimeT.compareTo(startTimeS) == 1 && endTimeT.compareTo(endTimeS) == -1 ) )
+    		{
+    			return RegistrationResult.TIME_CONFLICT;
+    		}
+    	}
         return RegistrationResult.SUCCESS;
     }
 
